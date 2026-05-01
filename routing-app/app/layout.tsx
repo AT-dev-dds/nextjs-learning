@@ -1,0 +1,19 @@
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en">
+      <body>
+        <header style={{backgroundColor:"grey", padding:"5px", height:"200px", width:"100%"}} >
+            <p>Header</p>
+        </header>
+        <main>{children}</main>
+        <footer style={{backgroundColor:"whitesmoke", padding:"5px", height:"200px", width:"100%"}} >
+            <p>Footer</p>
+        </footer>
+      </body>
+    </html>
+  )
+}
