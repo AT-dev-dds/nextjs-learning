@@ -2,9 +2,9 @@
 
 import React, { useState } from 'react'
 
-export const metadata={
-    title:"Counter"
-}
+// export const metadata={
+//     title:"Counter"
+// }
 
 export default function counter() {
     
