@@ -7,7 +7,12 @@ type Users={
 }
 
 async function getUsers(): Promise<Users[]> {
- const res= await fetch('https://jsonplaceholder.typicode.com/users');
+  console.log("Fetching users!....")
+ const res= await fetch('https://jsonplaceholder.typicode.com/users',{
+  //  cache:"no-store"
+
+  next: {revalidate:10}
+ });
   return res.json();
 }
 
