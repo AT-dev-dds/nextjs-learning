@@ -7,7 +7,8 @@ type Users={
 }
 
 async function getUsers(): Promise<Users[]> {
-  console.log("Fetching users!....")
+  console.log("Fetching users!....");
+  //  await new Promise((res) => setTimeout(res, 3000)); 
  const res= await fetch('https://jsonplaceholder.typicode.com/users',{
   //  cache:"no-store"
 
