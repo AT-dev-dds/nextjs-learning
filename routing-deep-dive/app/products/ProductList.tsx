@@ -1,7 +1,5 @@
 import ProductCard from "./ProductCard";
 
-
-
 type Product={
     id:number,
     title:string,
