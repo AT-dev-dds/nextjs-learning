@@ -1,17 +1,10 @@
+"use client"
 
+import handleSubmit from '../actions/Form'
 
 export default function page() {
 
-    async function handleSubmit(formdata:FormData){
-     "use server";
-
-     const name=formdata.get("name");
-     const email=formdata.get("email");
-     console.log(`Name: ${name}`);
-     console.log(`Email: ${email}`);
-    }
-
-
+    
   return (
    <>
    <h2>Contact form</h2>
