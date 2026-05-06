@@ -14,7 +14,7 @@ export async function POST (request:Request){
     const body= await request.json();
     const date=new Date();
     const newFeedback={
-        id:date.getDate(),
+        id:date.getMilliseconds(),
         message:body.message,
     }
 
