@@ -1,6 +1,4 @@
-export function GET() {
-
-  const users=[
+ let users=[
     {
     name:"Sunil Pal",
     age:24
@@ -10,6 +8,9 @@ export function GET() {
     age:26
   }
   ]
+
+export function GET() {
+
   return Response.json(users);
 };
 
@@ -19,7 +20,12 @@ const body=await request.json();
 
 console.log("Received ",body);
 
+users.push({
+  name:body.name,
+  age:0,
+})
+
 return Response.json({
-  message:"Data received"
+  message:"User added"
 });
 }
