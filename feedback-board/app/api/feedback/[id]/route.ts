@@ -15,7 +15,7 @@ export async function DELETE(_request:Request,{params}:{params:Promise<{id:strin
 
   const deleted= feedbacks.splice(index,1);
 
-  return Response.json({message:"Deleted Successfully!"});
+  return Response.json({message:"Deleted Successfully!",deletedFeedback:deleted[0]});
 };
 
 
