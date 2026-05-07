@@ -29,6 +29,18 @@ export default async function page() {
    revalidatePath("/feedback")
   }
 
+ async function handleDelete(formdata:FormData){
+
+   "use server"
+
+   const id=formdata.get("id");
+
+   await fetch(`http://localhost:3000/api/feedback/${id}`,{
+    method:"DELETE"
+   });
+   revalidatePath("/feedback")
+ }
+
   return (
     <>
       {
@@ -40,6 +52,7 @@ export default async function page() {
       <form action={handleSubmit}>
         <input type="text" name="message" placeholder="Please enter feedback here !" />
         <button type="submit" >Submit</button>
+        <button>Delete</button>
       </form>
     </>
   )

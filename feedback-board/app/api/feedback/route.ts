@@ -1,4 +1,4 @@
-let feedbacks=[
+export let feedbacks=[
     {
         id:1,
         message:"Nice app!"
