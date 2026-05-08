@@ -35,7 +35,7 @@ export default async function page() {
 
    "use server"
 
-   const id=formdata.get("id");
+   const id=formdata.get("_id");
 
    await fetch(`http://localhost:3000/api/feedback/${id}`,{
     method:"DELETE"
@@ -48,7 +48,7 @@ export default async function page() {
  async function handleUpdate(formdata:FormData){
   "use server"
 
-  const id=formdata.get("id");
+  const id=formdata.get("_id");
   const message=formdata.get("message");
 
   await fetch(`http://localhost:3000/api/feedback/${id}`,{
@@ -63,17 +63,17 @@ export default async function page() {
   return (
     <>
       {
-        feedbacks.map((feedback:any)=><div key={feedback.id} >
+        feedbacks.map((feedback:any)=><div key={feedback._id} >
           <p>{feedback.message}</p>
 
            <form action={handleDelete}>
-            <input type="hidden" name="id" value={feedback.id} />
+            <input type="hidden" name="_id" value={feedback._id} />
 
             <button type="submit" className="btn btn-danger text-white" >Delete</button>
            </form>
 
            <form action={handleUpdate} >
-              <input type="hidden" name="id" value={feedback.id} />
+              <input type="hidden" name="_id" value={feedback._id} />
               <input type="text" name="message" defaultValue={feedback.message} />
 
               <button type="submit" className="btn btn-warning" >Update</button>

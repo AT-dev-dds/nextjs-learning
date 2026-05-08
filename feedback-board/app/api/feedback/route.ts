@@ -1,11 +1,6 @@
 import client from '@/lib/mongodb'
 
-// export let feedbacks=[
-//     {
-//         id:1,
-//         message:"Nice app!"
-//     }
-// ];
+
 
 export async function GET(){
     await client.connect();
@@ -14,7 +9,12 @@ export async function GET(){
 
     const feedbacks= await db.collection("feedbacks").find().toArray();
 
-    return Response.json(feedbacks);
+
+    const formatted= feedbacks.map((f)=>({
+        ...f,_id:f._id.toString(),
+    }));
+
+    return Response.json(formatted);
 };
 
 
