@@ -1,53 +1,37 @@
+import { connectDB } from "@/lib/mongoose";
+import Feedback from "@/models/feedback";
 
-import client from '@/lib/mongodb'
-import { ObjectId } from 'mongodb';
+export async function DELETE(
+  _request: Request,
+  { params }: { params: Promise<{ id: string }> },
+) {
+  const { id } = await params;
 
+  await connectDB();
 
-export async function DELETE(_request:Request,{params}:{params:Promise<{id:string}>}){
+  await Feedback.findByIdAndDelete(id);
 
-  const {id}=await params;
-
-  await client.connect();
-
-  const db= client.db("feedbackDB");
-
-  const result= await db.collection("feedbacks").deleteOne({
-    _id: new ObjectId(id),
-  });
-
-  return Response.json({message:"Deleted Successfully!!",result});
-
+  return Response.json({ message: "Deleted Successfully!!" });
 }
 
+export async function PUT(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> },
+) {
+  const { id } = await params;
+  const body = await request.json();
 
+  await connectDB();
 
-
-
-
-export async function PUT(request:Request,{params}:{params:Promise<{id:string}>}){
-  
-  const {id}=await params;
-  const body=await request.json();
-
-  await client.connect();
-
-  const db=client.db("feedbackDB");
-
-   const updated= await db.collection("feedbacks").updateOne({
-    
-      _id:new ObjectId(id),
+  const updated = await Feedback.findByIdAndUpdate(
+    id,
+    {
+      message: body.message,
     },
     {
-      $set:{
-        message:body.message
-      }
+      new: true,
     },
-   );
+  );
 
-   return Response.json({message:"Feedback Updated",updated});
+  return Response.json(updated);
 }
-
-
-
-
-
