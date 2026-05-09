@@ -15,6 +15,7 @@ export async function GET(){
 
 export async function POST(request:Request){
 
+ try{
     const body= await request.json();
 
     await connectDB();
@@ -26,4 +27,12 @@ export async function POST(request:Request){
 )
 
     return Response.json(feedback);
+ }catch(err:any){
+    return Response.json({
+        message:err.message
+    },
+{
+    status:400,
+})
+ }
 }
