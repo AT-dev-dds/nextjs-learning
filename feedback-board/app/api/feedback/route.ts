@@ -20,8 +20,10 @@ export async function POST(request:Request){
     await connectDB();
 
     const feedback= await Feedback.create({
-        message:body.message
-    })
+        message:body.message,
+    },
+    
+)
 
     return Response.json(feedback);
 }
