@@ -1,34 +1,27 @@
-import client from '@/lib/mongodb'
+
+import { connectDB } from '@/lib/mongoose';
+import Feedback from '@/models/feedback'
 
 
 
 export async function GET(){
-    await client.connect();
+    await connectDB();
 
-    const db= client.db("feedbackDB");
+    const feedbacks= await Feedback.find().lean();
 
-    const feedbacks= await db.collection("feedbacks").find().toArray();
-
-
-    const formatted= feedbacks.map((f)=>({
-        ...f,_id:f._id.toString(),
-    }));
-
-    return Response.json(formatted);
+    return Response.json(feedbacks);
 };
 
 
 export async function POST(request:Request){
 
     const body= await request.json();
-    await client.connect();
 
-    const db=client.db("feedbackDB");
+    await connectDB();
 
-    const result= await db.collection("feedbacks").insertOne({
-        message:body.message,
-    });
+    const feedback= await Feedback.create({
+        message:body.message
+    })
 
-
-    return Response.json(result);
+    return Response.json(feedback);
 }
